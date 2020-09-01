@@ -522,6 +522,9 @@
     </property>
    </widget>
    <widget class="QCheckBox" name="stealthProfCheck1">
+    <property name="enabled">
+     <bool>true</bool>
+    </property>
     <property name="geometry">
      <rect>
       <x>180</x>
@@ -533,8 +536,14 @@
     <property name="text">
      <string/>
     </property>
+    <property name="checkable">
+     <bool>true</bool>
+    </property>
    </widget>
    <widget class="QCheckBox" name="perceptionProfCheck1">
+    <property name="enabled">
+     <bool>true</bool>
+    </property>
     <property name="geometry">
      <rect>
       <x>260</x>
@@ -545,6 +554,9 @@
     </property>
     <property name="text">
      <string/>
+    </property>
+    <property name="checkable">
+     <bool>true</bool>
     </property>
    </widget>
    <widget class="QLabel" name="stealthLabel">
@@ -580,6 +592,9 @@
     </property>
    </widget>
    <widget class="QCheckBox" name="stealthProfCheck2">
+    <property name="enabled">
+     <bool>true</bool>
+    </property>
     <property name="geometry">
      <rect>
       <x>180</x>
@@ -590,9 +605,15 @@
     </property>
     <property name="text">
      <string/>
+    </property>
+    <property name="checkable">
+     <bool>true</bool>
     </property>
    </widget>
    <widget class="QCheckBox" name="perceptionProfCheck2">
+    <property name="enabled">
+     <bool>true</bool>
+    </property>
     <property name="geometry">
      <rect>
       <x>260</x>
@@ -604,8 +625,14 @@
     <property name="text">
      <string/>
     </property>
+    <property name="checkable">
+     <bool>true</bool>
+    </property>
    </widget>
    <widget class="QCheckBox" name="stealthProfCheck3">
+    <property name="enabled">
+     <bool>true</bool>
+    </property>
     <property name="geometry">
      <rect>
       <x>180</x>
@@ -616,9 +643,15 @@
     </property>
     <property name="text">
      <string/>
+    </property>
+    <property name="checkable">
+     <bool>true</bool>
     </property>
    </widget>
    <widget class="QCheckBox" name="perceptionProfCheck3">
+    <property name="enabled">
+     <bool>true</bool>
+    </property>
     <property name="geometry">
      <rect>
       <x>260</x>
@@ -630,8 +663,14 @@
     <property name="text">
      <string/>
     </property>
+    <property name="checkable">
+     <bool>true</bool>
+    </property>
    </widget>
    <widget class="QCheckBox" name="stealthProfCheck4">
+    <property name="enabled">
+     <bool>true</bool>
+    </property>
     <property name="geometry">
      <rect>
       <x>180</x>
@@ -643,8 +682,14 @@
     <property name="text">
      <string/>
     </property>
+    <property name="checkable">
+     <bool>true</bool>
+    </property>
    </widget>
    <widget class="QCheckBox" name="perceptionProfCheck4">
+    <property name="enabled">
+     <bool>true</bool>
+    </property>
     <property name="geometry">
      <rect>
       <x>260</x>
@@ -655,6 +700,9 @@
     </property>
     <property name="text">
      <string/>
+    </property>
+    <property name="checkable">
+     <bool>true</bool>
     </property>
    </widget>
    <widget class="QPushButton" name="buttonRollPerception">
@@ -1718,6 +1766,32 @@
     </property>
     <property name="alignment">
      <set>Qt::AlignCenter</set>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="buttonAddAdventurer">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>10</y>
+      <width>100</width>
+      <height>25</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Add</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="buttonRemoveAdventurer">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>40</y>
+      <width>100</width>
+      <height>25</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Remove/Edit</string>
     </property>
    </widget>
   </widget>

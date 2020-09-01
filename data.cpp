@@ -3,11 +3,12 @@
 Data::Data()
 {
     adventurers = new Adventurer[4];
+
     //Temp hard-coding of adventurers
-    adventurers[0] = Adventurer("Valtr", 1100, 6, 1);
-    adventurers[1] = Adventurer("Magni Stonecheeks", 9000, 1, 3);
-    adventurers[2] = Adventurer("Dick Hickock", 250, 12, 4);
-    adventurers[3] = Adventurer("Krick Wickersnick", 20069, 2, -1);
+//    adventurers[0] = Adventurer("Valtr", 1100, 6, 1);
+//    adventurers[1] = Adventurer("Magni Stonecheeks", 9000, 1, 3);
+//    adventurers[2] = Adventurer("Thrawn the Crude", 250, 12, 4);
+//    adventurers[3] = Adventurer("Krick Wickersnick", 20069, 2, -1);
 
     xpTable = new int[20];
     xpTable[0] =    0;

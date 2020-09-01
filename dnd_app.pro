@@ -25,12 +25,12 @@ DEFINES += QT_DEPRECATED_WARNINGS
 CONFIG += c++11
 
 SOURCES += \
+        addadventurer.cpp \
         adventurer.cpp \
         data.cpp \
         dice.cpp \
         main.cpp \
-        mainwindow.cpp \
-        popup.cpp
+        mainwindow.cpp
 
 HEADERS += \
         adventurer.h \
@@ -40,8 +40,8 @@ HEADERS += \
         popup.h
 
 FORMS += \
-    mainwindow.ui \
-    popup.ui
+    addadventurer.ui \
+    mainwindow.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

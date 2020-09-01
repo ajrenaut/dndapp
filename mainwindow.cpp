@@ -3,6 +3,7 @@
 #include "dice.h"
 #include "data.h"
 #include <QCoreApplication>
+#include <QtSql>
 #include <QSqlDatabase>
 #include <QSqlDriver>
 #include <QSqlError>
@@ -11,80 +12,53 @@
 #include <QDebug>
 
 //TODO: Clean up includes
-
+//TODO: Update window from DB
+//TODO: Fix proficiency checks
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
 
-    QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE");\
-    QString dbPath = QDir::currentPath();
-    qDebug() << dbPath;
-    dbPath = dbPath + QString("/db.sqlite");
-    db.setDatabaseName(dbPath);
-    db.open();
+    QSqlDatabase db;
+    db = QSqlDatabase::addDatabase("QSQLITE");
+    db.setDatabaseName("/home/alex/dndapp/db.sqlite");
 
-    QSqlQuery query("CREATE TABLE adventurers ("
-                    "advNum INTEGER PRIMARY KEY,"
-                    "name TEXT NOT NULL,"
-                    "level INTEGER,"
-                    "perceptionMod INTEGER,"
-                    "stealthMod INTEGER,"
-                    "experience INTEGER)");
+    if(!db.open()) {
+        qDebug()<<"Unable to open database";
+    }
 
-    query.exec("CREATE TABLE advancement ("
-               "level INTEGER PRIMARY KEY,"
-               "requiredXP INTEGER"
-               "proficiency INTEGER)");
+    Adventurer *adventurers = new Adventurer[4];
+    for (int i = 0; i < 4; i++) {
+        adventurers[i] = Adventurer(i+1, db);
+    }
+    ui->adventurer1->setText(adventurers[0].getName());
+    ui->curLevel1->setText(QString::number(adventurers[0].getLevel()));
+    ui->nextLevel1->setText(QString::number(adventurers[0].getLevel()+1));
+    ui->xpBar1->setValue(adventurers[0].getXpProgress());
+    ui->stealthProfCheck1->setChecked(adventurers[0].getStealthProf());
+    ui->perceptionProfCheck1->setChecked(adventurers[0].getPerceptionProf());
 
+    ui->adventurer2->setText(adventurers[1].getName());
+    ui->curLevel2->setText(QString::number(adventurers[1].getLevel()));
+    ui->nextLevel2->setText(QString::number(adventurers[1].getLevel()+1));
+    ui->xpBar2->setValue(adventurers[1].getXpProgress());
+    ui->stealthProfCheck2->setChecked(adventurers[1].getStealthProf());
+    ui->perceptionProfCheck2->setChecked(adventurers[1].getPerceptionProf());
 
+    ui->adventurer3->setText(adventurers[2].getName());
+    ui->curLevel3->setText(QString::number(adventurers[2].getLevel()));
+    ui->nextLevel3->setText(QString::number(adventurers[2].getLevel()+1));
+    ui->xpBar3->setValue(adventurers[2].getXpProgress());
+    ui->stealthProfCheck3->setChecked(adventurers[2].getStealthProf());
+    ui->perceptionProfCheck3->setChecked(adventurers[2].getPerceptionProf());
 
-    // TODO: Make this dynamic.
-
-    /*
-
-    Data db;
-    ui->adventurer1->setText(QString::fromStdString(db.getAdventurer(0).getName()));
-    ui->curLevel1->setText(QString::number(db.getXPForLevel(db.getAdventurer(0).getLevel())));
-    ui->nextLevel1->setText(QString::number(db.getXPForLevel(db.getAdventurer(0).getLevel()+1)));
-    double xpPercent = static_cast<double>(db.getAdventurer(0).getExperience()
-                       - db.getXPForLevel(db.getAdventurer(0).getLevel())) /
-                       (db.getXPForLevel(db.getAdventurer(0).getLevel()+1)
-                       - db.getXPForLevel(db.getAdventurer(0).getLevel()));
-    int xpProgress = static_cast<int>(xpPercent * 100);
-    ui->xpBar1->setValue(xpProgress);
-
-    ui->adventurer2->setText(QString::fromStdString(db.getAdventurer(1).getName()));
-    ui->curLevel2->setText(QString::number(db.getXPForLevel(db.getAdventurer(1).getLevel())));
-    ui->nextLevel2->setText(QString::number(db.getXPForLevel(db.getAdventurer(1).getLevel()+1)));
-    xpPercent = static_cast<double>(db.getAdventurer(1).getExperience()
-                       - db.getXPForLevel(db.getAdventurer(1).getLevel())) /
-                       (db.getXPForLevel(db.getAdventurer(1).getLevel()+1)
-                       - db.getXPForLevel(db.getAdventurer(1).getLevel()));
-    xpProgress = static_cast<int>(xpPercent * 100);
-    ui->xpBar2->setValue(xpProgress);
-
-    ui->adventurer3->setText(QString::fromStdString(db.getAdventurer(2).getName()));
-    ui->curLevel3->setText(QString::number(db.getXPForLevel(db.getAdventurer(2).getLevel())));
-    ui->nextLevel3->setText(QString::number(db.getXPForLevel(db.getAdventurer(2).getLevel()+1)));
-    xpPercent = static_cast<double>(db.getAdventurer(2).getExperience()
-                       - db.getXPForLevel(db.getAdventurer(2).getLevel())) /
-                       (db.getXPForLevel(db.getAdventurer(2).getLevel()+1)
-                       - db.getXPForLevel(db.getAdventurer(2).getLevel()));
-    xpProgress = static_cast<int>(xpPercent * 100);
-    ui->xpBar3->setValue(xpProgress);
-
-    ui->adventurer4->setText(QString::fromStdString(db.getAdventurer(3).getName()));
-    ui->curLevel4->setText(QString::number(db.getXPForLevel(db.getAdventurer(3).getLevel())));
-    ui->nextLevel4->setText(QString::number(db.getXPForLevel(db.getAdventurer(3).getLevel()+1)));
-    xpPercent = static_cast<double>(db.getAdventurer(3).getExperience()
-                       - db.getXPForLevel(db.getAdventurer(3).getLevel())) /
-                       (db.getXPForLevel(db.getAdventurer(3).getLevel()+1)
-                       - db.getXPForLevel(db.getAdventurer(3).getLevel()));
-    xpProgress = static_cast<int>(xpPercent * 100);
-    ui->xpBar4->setValue(xpProgress);
-    */
+    ui->adventurer4->setText(adventurers[3].getName());
+    ui->curLevel4->setText(QString::number(adventurers[3].getLevel()));
+    ui->nextLevel4->setText(QString::number(adventurers[3].getLevel()+1));
+    ui->xpBar4->setValue(adventurers[3].getXpProgress());
+    ui->stealthProfCheck4->setChecked(adventurers[3].getStealthProf());
+    ui->perceptionProfCheck4->setChecked(adventurers[3].getPerceptionProf());
 }
 
 MainWindow::~MainWindow()
@@ -92,8 +66,7 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
-// TODO: Dice rolls need to update the log
-// Use C++ iostream
+// TODO: Use C++ iostream
 void MainWindow::on_rollD4_clicked()
 {
     if (ui->inputD4->text().isEmpty() || ui->inputD4Mod->text().isEmpty()) return;
@@ -299,7 +272,6 @@ void MainWindow::on_rollDX_clicked()
 
 void MainWindow::on_buttonRollStealth_clicked()
 {
-    //TODO: Make this dynamic
     Data db;
     int mods[4];
     for (int i = 0; i < 4; i++) {
@@ -324,5 +296,25 @@ void MainWindow::on_buttonRollStealth_clicked()
 
 void MainWindow::on_buttonRollPerception_clicked()
 {
+    Data db;
+    int mods[4];
+    for (int i = 0; i < 4; i++) {
+        mods[i] = db.getAdventurer(i).getPerceptionMod();
+    }
 
+    if (ui->stealthProfCheck1->isChecked()) mods[0] += db.getAdventurer(0).getProficiencyMod();
+    if (ui->stealthProfCheck2->isChecked()) mods[1] += db.getAdventurer(1).getProficiencyMod();
+    if (ui->stealthProfCheck3->isChecked()) mods[2] += db.getAdventurer(2).getProficiencyMod();
+    if (ui->stealthProfCheck4->isChecked()) mods[3] += db.getAdventurer(3).getProficiencyMod();
+
+    int* results;
+    Dice perceptionRolls(4, 20);
+    results = perceptionRolls.getResults();
+    for (int i = 0; i < 4; i++) {
+        results[i] += mods[i];
+    }
+    ui->advRollResult1->setText(QString::number(results[0]));
+    ui->advRollResult2->setText(QString::number(results[1]));
+    ui->advRollResult3->setText(QString::number(results[2]));
+    ui->advRollResult4->setText(QString::number(results[3]));
 }
